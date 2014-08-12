@@ -15,7 +15,7 @@
 			beforeSubmit: function(arr, $form, options) {
 				$form.wpcf7ClearResponseOutput();
 				$form.find('[aria-invalid]').attr('aria-invalid', 'false');
-				$form.find('img.ajax-loader').css({ visibility: 'visible' });
+				$form.find('img.ajax-loader').css({ display: 'inline' });
 				return true;
 			},
 			beforeSerialize: function($form, options) {
@@ -79,7 +79,7 @@
 
 		$form.wpcf7ClearResponseOutput();
 
-		$form.find('.wpcf7-form-control').removeClass('wpcf7-not-valid');
+		$form.find('.wpcf7-form-control').removeClass('alert alert-danger'); 	// .wpcf7-not-valid'
 		$form.removeClass('invalid spam sent failed');
 
 		if (data.captcha)
@@ -91,23 +91,23 @@
 		if (data.invalids) {
 			$.each(data.invalids, function(i, n) {
 				$form.find(n.into).wpcf7NotValidTip(n.message);
-				$form.find(n.into).find('.wpcf7-form-control').addClass('wpcf7-not-valid');
+				$form.find(n.into).find('.wpcf7-form-control').addClass('alert alert-danger');  // .wpcf7-not-valid
 				$form.find(n.into).find('[aria-invalid]').attr('aria-invalid', 'true');
 			});
 
-			$responseOutput.addClass('wpcf7-validation-errors');
+			$responseOutput.addClass('alert alert-danger');  // .wpcf7-validation-errors
 			$form.addClass('invalid');
 
 			$(data.into).trigger('invalid.wpcf7');
 
 		} else if (1 == data.spam) {
-			$responseOutput.addClass('wpcf7-spam-blocked');
+			$responseOutput.addClass('alert alert-danger');  // .wpcf7-spam-blocked
 			$form.addClass('spam');
 
 			$(data.into).trigger('spam.wpcf7');
 
 		} else if (1 == data.mailSent) {
-			$responseOutput.addClass('wpcf7-mail-sent-ok');
+			$responseOutput.addClass('alert alert-success');  // .wpcf7-mail-sent-ok
 			$form.addClass('sent');
 
 			if (data.onSentOk)
@@ -116,7 +116,7 @@
 			$(data.into).trigger('mailsent.wpcf7');
 
 		} else {
-			$responseOutput.addClass('wpcf7-mail-sent-ng');
+			$responseOutput.addClass('alert alert-danger');  // .wpcf7-mail-sent-ng
 			$form.addClass('failed');
 
 			$(data.into).trigger('mailfailed.wpcf7');
@@ -172,7 +172,7 @@
 		return this.each(function() {
 			var loader = $('<img class="ajax-loader" />')
 				.attr({ src: _wpcf7.loaderUrl, alt: _wpcf7.sending })
-				.css('visibility', 'hidden');
+				.css('display', 'none');
 
 			$(this).after(loader);
 		});
@@ -302,7 +302,7 @@
 
 	$.fn.wpcf7ClearResponseOutput = function() {
 		return this.each(function() {
-			$(this).find('div.wpcf7-response-output').hide().empty().removeClass('wpcf7-mail-sent-ok wpcf7-mail-sent-ng wpcf7-validation-errors wpcf7-spam-blocked').removeAttr('role');
+			$(this).find('div.wpcf7-response-output').hide().empty().removeClass('wpcf7-mail-sent-ok wpcf7-mail-sent-ng wpcf7-validation-errors wpcf7-spam-blocked alert alert-danger').removeAttr('role');
 			$(this).find('span.wpcf7-not-valid-tip').remove();
 			$(this).find('img.ajax-loader').css({ visibility: 'hidden' });
 		});

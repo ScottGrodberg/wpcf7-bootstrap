@@ -7,6 +7,7 @@ class WPCF7_ContactForm {
 	private static $found_items = 0;
 	private static $current = null;
 
+
 	private $id;
 	private $name;
 	private $title;
@@ -313,6 +314,7 @@ class WPCF7_ContactForm {
 		$class = implode( ' ', $class );
 		$class = apply_filters( 'wpcf7_form_class_attr', $class );
 
+
 		$enctype = apply_filters( 'wpcf7_form_enctype', '' );
 
 		$novalidate = apply_filters( 'wpcf7_form_novalidate', wpcf7_support_html5() );
@@ -373,16 +375,16 @@ class WPCF7_ContactForm {
 			$content = $submission->get_response();
 
 			if ( $submission->is( 'validation_failed' ) ) {
-				$class .= ' wpcf7-validation-errors';
+				$class .= ' alert alert-danger';
 			} elseif ( $submission->is( 'spam' ) ) {
-				$class .= ' wpcf7-spam-blocked';
+				$class .= ' alert alert-danger';
 			} elseif ( $submission->is( 'mail_sent' ) ) {
-				$class .= ' wpcf7-mail-sent-ok';
+				$class .= ' alert alert-success';
 			} elseif ( $submission->is( 'mail_failed' ) ) {
-				$class .= ' wpcf7-mail-sent-ng';
+				$class .= ' alert alert-danger';
 			}
 		} else {
-			$class .= ' wpcf7-display-none';
+			$class .= ' alert alert-danger';
 		}
 
 		$atts = array(
