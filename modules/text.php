@@ -35,11 +35,12 @@ function wpcf7_text_shortcode_handler( $tag ) {
 
 	$atts = array();
 
-	$atts['size'] = $tag->get_size_option( '40' );
+	$atts['style'] = "width:100%;";
 	$atts['maxlength'] = $tag->get_maxlength_option();
 	$atts['class'] = $tag->get_class_option( $class );
 	$atts['id'] = $tag->get_id_option();
 	$atts['tabindex'] = $tag->get_option( 'tabindex', 'int', true );
+  
 
 	if ( $tag->has_option( 'readonly' ) )
 		$atts['readonly'] = 'readonly';

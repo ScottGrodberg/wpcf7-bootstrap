@@ -30,7 +30,8 @@ function wpcf7_select_shortcode_handler( $tag ) {
 	$atts['class'] = $tag->get_class_option( $class );
 	$atts['id'] = $tag->get_id_option();
 	$atts['tabindex'] = $tag->get_option( 'tabindex', 'int', true );
-
+  $atts['style'] = "width:100%;";
+	
 	if ( $tag->is_required() )
 		$atts['aria-required'] = 'true';
 
