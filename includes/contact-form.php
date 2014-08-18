@@ -384,7 +384,7 @@ class WPCF7_ContactForm {
 				$class .= ' alert alert-danger';
 			}
 		} else {
-			$class .= ' alert alert-danger';
+			$class .= ' wpcf7-display-none';
 		}
 
 		$atts = array(
